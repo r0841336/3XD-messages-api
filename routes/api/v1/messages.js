@@ -174,19 +174,24 @@ router.put("/:id", (req, res, next) => {
 
 
 
+// DELETE: Verwijder een bericht op basis van ID
 router.delete("/:id", (req, res, next) => {
+    const id = parseInt(req.params.id);
+    const messageIndex = messages.findIndex(msg => msg.id === id);
 
-    res.status(200).json({
-
-        status: "success",
-
-        message: "DELETE message"
-
-    });
-
-}
-
-);
+    if (messageIndex !== -1) {
+        messages.splice(messageIndex, 1); // Verwijder bericht uit de array
+        res.status(200).json({
+            status: "success",
+            message: "Message deleted"
+        });
+    } else {
+        res.status(404).json({
+            status: "fail",
+            message: "Message not found"
+        });
+    }
+});
 
 module.exports = router;
 
