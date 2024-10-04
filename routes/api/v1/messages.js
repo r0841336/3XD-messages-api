@@ -1,80 +1,22 @@
 // Add routes
 const express = require("express");
 const router = express.Router();
+const messageController = require("../../../controllers/api/v1/message");
 
 // GET /api/v1/messages
-router.get("/", (req, res, next) => {
-  res.status(200).json({
-    status: "success",
-    message: "GET messages",
-    data: {
-      messages: [
-        {
-          id: 1,
-          message: "Hello World",
-          user: "John Doe",
-        },
-        {
-          id: 2,
-          message: "Hello Universe",
-          user: "Jane Doe",
-        },
-      ],
-    },
-  });
-});
+router.get("/", messageController.index);
 
 // GET /api/v1/messages/:id
-router.get("/:id", (req, res, next) => {
-  res.status(200).json({
-    status: "success",
-    message: "GET message",
-    data: {
-      message: {
-        id: req.params.id,
-        message: "Hello World",
-        user: "John Doe",
-      },
-    },
-  });
-});
+router.get("/:id",messageController.show );
 
 // POST /api/v1/messages
-router.post("/", (req, res, next) => {
-  res.status(200).json({
-    status: "success",
-    message: "POST message",
-    data: {
-      message: req.body.message,
-      user: req.body.user,
-    },
-  });
-});
+router.post("/", messageController.create);
 
 // PUT /api/v1/messages/:id
-router.put("/:id", (req, res, next) => {
-  res.status(200).json({
-    status: "success",
-    message: "PUT message",
-    data: {
-      message: req.body.message,
-      user: req.body.user,
-    },
-  });
-});
+router.put("/:id", messageController.update);
 
 // DELETE /api/v1/messages/:id
-router.delete("/:id", (req, res, next) => {
-  res.status(200).json({
-    status: "success",
-    message: "DELETE message",
-    data: {
-      message: {
-        _id: req.params.id,
-      },
-    },
-  });
-});
+router.delete("/:id", messageController.destroy);
 
 
 
