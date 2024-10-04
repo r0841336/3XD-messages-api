@@ -1,161 +1,81 @@
-var express = require('express');
+// Add routes
+const express = require("express");
+const router = express.Router();
 
-var router = express.Router();
-
-
-
-
-// Define the GET endpoint for "/"
-
+// GET /api/v1/messages
 router.get("/", (req, res, next) => {
-
-    res.status(200).json({ 
-
-        status: "success",
-
-        message:  "GET messages",
-
-        data: {
-
-            "messages": [
-
-                {
-
-                    id: 1,
-
-                    user: "user1",
-
-                    message: "message1"
-
-                },
-
-                {
-
-                    id: 2,
-
-                    user: "user2",
-
-                    message: "message2"
-
-                }
-
-            ]
-
-        }
-
-    });
-
+  res.status(200).json({
+    status: "success",
+    message: "GET messages",
+    data: {
+      messages: [
+        {
+          id: 1,
+          message: "Hello World",
+          user: "John Doe",
+        },
+        {
+          id: 2,
+          message: "Hello Universe",
+          user: "Jane Doe",
+        },
+      ],
+    },
+  });
 });
 
+// GET /api/v1/messages/:id
 router.get("/:id", (req, res, next) => {
+  res.status(200).json({
+    status: "success",
+    message: "GET message",
+    data: {
+      message: {
+        id: req.params.id,
+        message: "Hello World",
+        user: "John Doe",
+      },
+    },
+  });
+});
 
-    res.status(200).json({ 
-
-        status: "success",
-
-        message:  "GET message",
-
-        data: {
-
-            "message": {
-
-                id: 1,
-
-            }
-
-        }
-
-    });
-
-}
-
-);
-
+// POST /api/v1/messages
 router.post("/", (req, res, next) => {
+  res.status(200).json({
+    status: "success",
+    message: "POST message",
+    data: {
+      message: req.body.message,
+      user: req.body.user,
+    },
+  });
+});
 
-    res.status(200).json({ 
-
-        status: "success",
-
-        message:  "POST message",
-
-        data: {
-
-            "message": {
-
-                id: 1,
-
-                
-
-            }
-
-        }
-
-    });
-
-}
-
-);
-
-
-
-
+// PUT /api/v1/messages/:id
 router.put("/:id", (req, res, next) => {
+  res.status(200).json({
+    status: "success",
+    message: "PUT message",
+    data: {
+      message: req.body.message,
+      user: req.body.user,
+    },
+  });
+});
 
-    res.status(200).json({
-
-        status: "success",
-
-        message: "PUT message",
-
-        data: {
-
-            "message": {
-
-                id: 1,
-
-            }
-
-        }
-
-    });
-
-}
-
-);
-
-
-
-
-router.get("/:user", (req, res, next) => {
-
-    res.status(200).json({
-
-        status: "success",
-
-        message: "GET message",
-
-        data: {
-
-            "messages": [
-
-                {
-
-                    id: 1,
+// DELETE /api/v1/messages/:id
+router.delete("/:id", (req, res, next) => {
+  res.status(200).json({
+    status: "success",
+    message: "DELETE message",
+    data: {
+      message: {
+        _id: req.params.id,
+      },
+    },
+  });
+});
 
 
 
-
-                }
-
-            ]
-
-        }
-
-    });
-
-}
-
-);
-
-module.exports = router;
+module.exports = router;
